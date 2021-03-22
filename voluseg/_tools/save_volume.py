@@ -11,7 +11,7 @@ def save_volume(fullname_ext, volume, affine_mat=None):
 
         if ('.h5' in ext) or ('.hdf5' in ext):
             with h5py.File(fullname_ext, 'w') as file_handle:
-                file_handle.create_dataset('volume', data=volume, compression='gzip')
+                file_handle.create_dataset('volume', data=volume, compression='gzip', chunks=(1,255,255))
         elif ('.nii' in ext) or ('.nii.gz' in ext):
             nii = nibabel.Nifti1Image(volume, affine_mat)
             nii.header['qform_code'] = 2      # make codes consistent with ANTS
