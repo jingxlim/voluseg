@@ -108,9 +108,13 @@ def detect_cells(parameters):
 
             ii, xyz0, xyz1 = tuple_i_xyz0_xyz1[1]
 
-            voxel_xyz, voxel_timeseries, peak_idx, voxel_similarity_peak = \
-                process_block_data(xyz0, xyz1, parameters, color_i, lxyz, rxyz,
-                                   ball_diam, bvolume_mean, bvolume_peak, timepoints)
+            try:
+                voxel_xyz, voxel_timeseries, peak_idx, voxel_similarity_peak = \
+                    process_block_data(xyz0, xyz1, parameters, color_i, lxyz, rxyz,
+                                       ball_diam, bvolume_mean, bvolume_peak, timepoints)
+            except Exception as e:
+                print(["BAD BLOCK", ii, xyz0, xyz1])
+                print(Exception)
 
             n_voxels_block = len(voxel_xyz)                        # number of voxels in block
 
